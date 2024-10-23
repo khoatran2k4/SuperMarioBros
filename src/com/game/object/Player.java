@@ -13,6 +13,8 @@ public class Player extends GameObject{
 	private static final float WIDTH = 16;
 	private static final float HEIGHT = 32;
 	
+	private boolean jumped = false;
+	
 	public Player(float x, float y, int scale, Handler handler) {
 		super(x, y, ObjectId.Player, WIDTH, HEIGHT, scale);
 		
@@ -70,6 +72,14 @@ public class Player extends GameObject{
 		g2d.draw(getBoundsRight());
 		g2d.draw(getBoundsLeft());
 		g2d.draw(getBoundsRight());
+	}
+	
+	public boolean hasJumped() {
+		return jumped;
+	}
+	
+	public void setJumped(boolean hasJumped) {
+		jumped = hasJumped;
 	}
 
 }

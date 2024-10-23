@@ -59,4 +59,8 @@ public class Handler {
 		return 0;
 	}
 	
+	public Player getPlayer() {
+		return player;
+	}
+	
 }
