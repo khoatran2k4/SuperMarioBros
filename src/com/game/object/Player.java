@@ -24,7 +24,7 @@ public class Player extends GameObject{
 	public void tick() {
 		setX(getVelX() + getX());
 		setY(getVelY() + getY());
-		//applyGravity();
+		applyGravity();
 	}
 
 	@Override
