@@ -7,6 +7,7 @@ import java.awt.Window;
 import java.awt.image.BufferStrategy;
 
 import com.game.gfx.Windows;
+import com.game.object.Block;
 import com.game.object.Player;
 import com.game.object.util.Handler;
 import com.game.object.util.KeyInput;
@@ -43,7 +44,17 @@ public class Game extends Canvas implements Runnable {
 		handler = new Handler();
 		this.addKeyListener(new KeyInput(handler));
 		
+		// temporary code
 		handler.setPlayer(new Player(32, 32, 1, handler));
+		System.out.println(handler.getGameObjs());
+		for(int i=0; i<20; i++) {
+			handler.addObj(new Block(i*32, 32*10, 32, 32, 1));
+		}
+		for(int i=0; i<30; i++) {
+			handler.addObj(new Block(i*32, 32*15, 32, 32, 1));
+		}
+		
+	
 		
 		new Windows(WINDOW_WIDTH, WINDOW_HEIGHT, NAME, this);
 		
@@ -88,6 +99,7 @@ public class Game extends Canvas implements Runnable {
 				tick();
 				updates++;
 				delta = delta - count * 15;
+//				delta = delta - 1;
 				count = count + 0.3;
 			}
 			

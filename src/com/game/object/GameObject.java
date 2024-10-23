@@ -27,7 +27,7 @@ public abstract class GameObject {
 	public abstract Rectangle getBounds();
 	
 	public void applyGravity() {
-		velY += 0.1f;
+		velY += 0.5f;
 		System.out.println("Vel Y" + getVelY());
 	}
 	

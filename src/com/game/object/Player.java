@@ -13,11 +13,13 @@ public class Player extends GameObject{
 	private static final float WIDTH = 16;
 	private static final float HEIGHT = 32;
 	
+	private Handler handler;
+	
 	private boolean jumped = false;
 	
 	public Player(float x, float y, int scale, Handler handler) {
 		super(x, y, ObjectId.Player, WIDTH, HEIGHT, scale);
-		
+		this.handler = handler;
 	}
 
 	@Override
@@ -25,6 +27,8 @@ public class Player extends GameObject{
 		setX(getVelX() + getX());
 		setY(getVelY() + getY());
 		applyGravity();
+		
+		collision();
 	}
 
 	@Override
@@ -32,6 +36,34 @@ public class Player extends GameObject{
 		g.setColor(Color.yellow);
 		g.fillRect((int) getX(), (int) getY(), (int) WIDTH, (int) HEIGHT);
 		showBounds(g);
+	}
+	
+	private void collision() {
+		for(int i = 0; i < handler.getGameObjs().size(); i++) {
+			GameObject temp = handler.getGameObjs().get(i);
+			
+			if (temp.getId() == ObjectId.Block || temp.getId() == ObjectId.Pipe) {
+				if(getBounds().intersects(temp.getBounds())) {
+					setY(temp.getY() - getHeight());
+					setVelY(0);
+					jumped = false;
+				}
+				
+				if(getBoundsTop().intersects(temp.getBounds())) {
+					setY(temp.getY() + temp.getHeight());
+					setVelY(0);
+				}
+				
+				if (getBoundsRight().intersects(temp.getBounds())) {
+					setX(temp.getX() - getWidth());
+				}
+				
+				if (getBoundsLeft().intersects(temp.getBounds())) {
+					setX(temp.getX() + temp.getWidth());
+				}
+			}
+			
+		}
 	}
 
 	@Override
